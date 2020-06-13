@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXColorPicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.textfield.CustomTextField?>
+
+<AnchorPane fx:id="apParent" prefHeight="191.0" prefWidth="331.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notesfx.controller.NoteController">
+   <children>
+      <AnchorPane id="ap" fx:id="ap" layoutX="16.0" layoutY="13.0" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="160.0" prefWidth="296.0" styleClass="mainFxmlClass" AnchorPane.bottomAnchor="18.0" AnchorPane.topAnchor="13.0">
+          <stylesheets>
+              <URL value="@note.css" />
+          </stylesheets>
+         <children>
+            <ImageView fx:id="imageView" fitHeight="160.0" fitWidth="296.0" layoutX="14.0" layoutY="5.0" opacity="0.61" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Pane fx:id="paneM" onMouseDragged="#onDrag" onMousePressed="#onPress" onMouseReleased="#onRelease" prefHeight="37.0" prefWidth="271.0" style="-fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label fx:id="lTitile" prefHeight="42.0" prefWidth="296.0" text="title here" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="paneHead" layoutY="-2.0" style="-fx-background-color: #00000021;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <CustomTextField fx:id="tfTitle" layoutX="37.0" layoutY="7.0" maxWidth="900.0" minWidth="106.0" onKeyReleased="#onKeyRelease" prefHeight="28.0" prefWidth="152.0" promptText="title here .." />
+                  <JFXButton contentDisplay="CENTER" graphicTextGap="0.0" layoutY="2.0" onAction="#getNewNote" prefHeight="40.0" prefWidth="23.0" text=" ">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE_ALT" size="25" wrappingWidth="19.64285659790039" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXColorPicker id="cp" fx:id="cp" layoutX="200.0" layoutY="8.0" minHeight="12.0" onAction="#changeColor" prefHeight="12.0" prefWidth="23.0" promptText="change color" />
+                  <JFXButton contentDisplay="CENTER" layoutX="258.0" layoutY="4.0" onAction="#getDeleteNote" prefHeight="25.0" prefWidth="23.0" text=" ">
+                     <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="TRASH_ALT" size="25" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXColorPicker id="cp" fx:id="cpTxt" layoutX="231.0" layoutY="8.0" minHeight="12.0" onAction="#changeColorTxt" prefHeight="12.0" prefWidth="23.0" promptText="change color" />
+               </children>
+            </Pane>
+            <Pane layoutX="6.0" layoutY="43.0" prefHeight="114.0" prefWidth="284.0" style="-fx-background-color: #ffffff31; -fx-background-radius: 5px;" AnchorPane.bottomAnchor="6.0" AnchorPane.topAnchor="43.0">
+               <children>
+                  <BorderPane>
+                     <center>
+                        <JFXTextArea id="scrlv2" fx:id="taNote" focusColor="#00000036" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="284.0" style="-fx-highlight-fill: #b8b8b8; -fx-text-fill: white;" unFocusColor="TRANSPARENT">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXTextArea>
+                     </center>
+                  </BorderPane>
+               </children>
+            </Pane>
+            <JFXButton fx:id="bPaw" contentDisplay="CENTER" layoutX="262.0" layoutY="40.0" onMouseDragged="#onDrag" onMousePressed="#onPress" onMouseReleased="#onRelease" prefHeight="25.0" prefWidth="23.0" text=" ">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="PAW" size="15" />
+               </graphic>
+            </JFXButton>
+         </children>
+         <effect>
+            <DropShadow height="9.14" radius="4.8100000000000005" width="12.1" />
+         </effect>
+      </AnchorPane>
+   </children>
+</AnchorPane>
