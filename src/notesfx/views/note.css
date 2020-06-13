@@ -3,7 +3,8 @@
  */
 
 .mainFxmlClass {
-    -fx-background-color: #6affae;
+    /*-fx-background-color: #6affae;*/
+    -fx-background-color: #dc5a5a;
 }
 .button{
     -fx-cursor: hand;

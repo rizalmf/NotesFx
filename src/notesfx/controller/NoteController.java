@@ -18,12 +18,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +38,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -65,9 +64,9 @@ public class NoteController implements Initializable {
     @FXML
     private AnchorPane ap;
     @FXML
-    private Pane paneHead;
+    private HBox paneHead;
     @FXML
-    private Pane paneM;
+    private HBox paneM;
     @FXML
     private AnchorPane apParent;
     @FXML
@@ -96,8 +95,9 @@ public class NoteController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // TODO
         service = new JdbcService();
-        cp.setValue(Color.web("#6affae"));
+        cp.setValue(Color.web("#dc5a5a"));
         getFromOther();
         use_image = false;
         apParent.setBackground(Background.EMPTY);
@@ -111,7 +111,8 @@ public class NoteController implements Initializable {
         ap.setOnDragDropped((event) -> {
             try {
                 List<File> files = event.getDragboard().getFiles();
-                Image img = new Image(new FileInputStream(files.get(0)), 296, 160, false, false);
+                Image img = new Image(new FileInputStream(files.get(0)), 
+                        ap.getWidth(), ap.getHeight(), false, false);
                 imageView.setImage(img);
 //                cp.setValue(Color.BLACK);
 //                ap.setStyle("-fx-background-color:black");
@@ -126,25 +127,22 @@ public class NoteController implements Initializable {
                 Logger.getLogger(NoteController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        //aaa();
-        // TODO
-    }  
-    private void aaa(){
-        Timeline tl = new Timeline(new KeyFrame(Duration.ONE, (e) -> {
+        Platform.runLater(() -> {
             Stage thisStage = (Stage) ap.getScene().getWindow();
-            new FXResizeHelper(thisStage, 100, 40, taNote);
-            
-        }));
-        tl.setCycleCount(1);
-        tl.setDelay(Duration.seconds(2));
-        tl.play();
-    }
+            new FXResizeHelper(thisStage, 5, 24, 325, 171);
+            imageView.fitWidthProperty().bind(ap.widthProperty());
+            imageView.fitHeightProperty().bind(ap.heightProperty());
+        });
+        
+    }  
+    
     private void setNewNote(Note n){
         cp.setValue(Color.web(n.getColor_bg()));//ds.getColorBg().replaceAll("-fx-background-color:", "")
         cpTxt.setValue(Color.web(n.getColor_txt()));
         ap.setStyle("-fx-background-color:"+toRGB(cp.getValue()));
         taNote.setStyle("-fx-text-fill:"+toRGB(cpTxt.getValue()));
         lTitile.setStyle("-fx-text-fill:"+toRGB(cpTxt.getValue())+"; -fx-font-weight:bold");
+        lTitile.setText(n.getTitle());
         tfTitle.setText(n.getTitle());
         taNote.setText(n.getText());
         if (n.getIs_picture() != null) {

@@ -13,7 +13,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
-import javafx.scene.control.TextArea;
 
 /**
  * @author Simon Reinisch
@@ -24,7 +23,6 @@ public class FXResizeHelper {
   private final HashMap<Cursor, EventHandler<MouseEvent>> LISTENER = new HashMap<>();
   private final Stage STAGE;
   private final Scene SCENE;
-  private final TextArea tArea;
   private final int TR;
   private final int TM;
   private final double SCREEN_WIDTH, SCREEN_HEIGHT;
@@ -43,17 +41,18 @@ public class FXResizeHelper {
    * @param stage - The JavaFX Stage.
    * @param dt    - The area (in px) where the user can drag the window.
    * @param rt    - The area (in px) where the user can resize the window.
-     * @param textArea
+     * @param minWidth
+     * @param minHeight
    */
-  public FXResizeHelper(Stage stage, int dt, int rt, TextArea textArea) {
+  public FXResizeHelper(Stage stage, int dt, int rt, double minWidth, double minHeight) {
     this.TR = rt;
     this.TM = dt + rt;
     this.STAGE = stage;
     this.SCENE = stage.getScene();
-    this.tArea = textArea;
     this.SCREEN_HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
     this.SCREEN_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
-
+    this.STAGE.setMinWidth(minWidth);
+    this.STAGE.setMinHeight(minHeight);
     createListener();
     launch();
   }
@@ -97,11 +96,10 @@ public class FXResizeHelper {
       if (newHeight > STAGE.getMinHeight()) {
         STAGE.setY(event.getScreenY() - mPresSceneY);
         STAGE.setHeight(newHeight);
-        tArea.setPrefHeight(newHeight-80);
       }
       if (newWidth > STAGE.getMinWidth()) {
         STAGE.setX(event.getScreenX() - mPresSceneX);
-        //STAGE.setWidth(newWidth);
+        STAGE.setWidth(newWidth);
       }
     });
 
@@ -111,11 +109,10 @@ public class FXResizeHelper {
       double newHeight = mPresStageH + (event.getScreenY() - mPresScreeY);
       if (newHeight > STAGE.getMinHeight()){
           STAGE.setHeight(newHeight);
-        tArea.setPrefHeight(newHeight-80);
       }
       if (newWidth > STAGE.getMinWidth()) {
         STAGE.setX(event.getScreenX() - mPresSceneX);
-        //STAGE.setWidth(newWidth);
+        STAGE.setWidth(newWidth);
       }
     });
 
@@ -126,10 +123,9 @@ public class FXResizeHelper {
       if (newHeight > STAGE.getMinHeight()) {
         STAGE.setHeight(newHeight);
         STAGE.setY(event.getScreenY() - mPresSceneY);
-        tArea.setPrefHeight(newHeight-80);
       }
-      if (newWidth > STAGE.getMinWidth()) {//STAGE.setWidth(newWidth);
-          
+      if (newWidth > STAGE.getMinWidth()) {
+          STAGE.setWidth(newWidth);
       }
     });
 
@@ -138,10 +134,9 @@ public class FXResizeHelper {
       double newHeight = mPresStageH + (event.getScreenY() - mPresScreeY);
       if (newHeight > STAGE.getMinHeight()) {
           STAGE.setHeight(newHeight);
-        tArea.setPrefHeight(newHeight-80);
       }
-      if (newWidth > STAGE.getMinWidth()) {//STAGE.setWidth(newWidth);
-          
+      if (newWidth > STAGE.getMinWidth()) {
+          STAGE.setWidth(newWidth);
       }
     });
 
@@ -149,14 +144,14 @@ public class FXResizeHelper {
       double newWidth = mPresStageW - (event.getScreenX() - mPresScreeX);
       if (newWidth > STAGE.getMinWidth()) {
         STAGE.setX(event.getScreenX() - mPresSceneX);
-        //STAGE.setWidth(newWidth);
+        STAGE.setWidth(newWidth);
       }
     });
 
     LISTENER.put(Cursor.W_RESIZE, event -> {
       double newWidth = mPresStageW + (event.getScreenX() - mPresScreeX);
-      if (newWidth > STAGE.getMinWidth()) {//STAGE.setWidth(newWidth);
-          
+      if (newWidth > STAGE.getMinWidth()) {
+          STAGE.setWidth(newWidth);
       }
     });
 
@@ -165,7 +160,6 @@ public class FXResizeHelper {
       if (newHeight > STAGE.getMinHeight()) {
         STAGE.setY(event.getScreenY() - mPresSceneY);
         STAGE.setHeight(newHeight);
-        tArea.setPrefHeight(newHeight-80);
       }
     });
 
@@ -173,7 +167,6 @@ public class FXResizeHelper {
       double newHeight = mPresStageH + (event.getScreenY() - mPresScreeY);
       if (newHeight > STAGE.getMinHeight()) {
           STAGE.setHeight(newHeight);
-        tArea.setPrefHeight(newHeight-80);
       }
     });
 
