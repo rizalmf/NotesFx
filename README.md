@@ -8,6 +8,8 @@
 - 
 
 ### Changelog
+- v1.2.1
+   - fix resizeable notes, remove unused vars
 - v1.2.0
    - add feature resizeable notes, optimize fxml, change default background, takeout unused library
 - v1.1.2

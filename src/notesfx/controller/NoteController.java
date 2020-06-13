@@ -86,9 +86,6 @@ public class NoteController implements Initializable {
     private Note note;
     private Note note2;
     private JdbcService service;
-    private boolean use_image;
-    private String is_picture;
-    private String url_picture;
     public List<Note> noteList;
     /**
      * Initializes the controller class.
@@ -99,7 +96,6 @@ public class NoteController implements Initializable {
         service = new JdbcService();
         cp.setValue(Color.web("#dc5a5a"));
         getFromOther();
-        use_image = false;
         apParent.setBackground(Background.EMPTY);
         paneHead.setVisible(false);
         bPaw.setVisible(false);
@@ -116,7 +112,6 @@ public class NoteController implements Initializable {
                 imageView.setImage(img);
 //                cp.setValue(Color.BLACK);
 //                ap.setStyle("-fx-background-color:black");
-                use_image = true;
                 if (note == null) {
                     //new Note
                     note = new Note();
@@ -129,7 +124,7 @@ public class NoteController implements Initializable {
         });
         Platform.runLater(() -> {
             Stage thisStage = (Stage) ap.getScene().getWindow();
-            new FXResizeHelper(thisStage, 5, 24, 325, 171);
+            new FXResizeHelper(thisStage, -5, 24, 325, 171);
             imageView.fitWidthProperty().bind(ap.widthProperty());
             imageView.fitHeightProperty().bind(ap.heightProperty());
         });
