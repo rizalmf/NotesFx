@@ -17,7 +17,7 @@
 
 <AnchorPane fx:id="apParent" prefHeight="191.0" prefWidth="331.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="notesfx.controller.NoteController">
    <children>
-      <AnchorPane id="ap" fx:id="ap" layoutX="16.0" layoutY="13.0" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="160.0" prefWidth="296.0" styleClass="mainFxmlClass" AnchorPane.bottomAnchor="18.0" AnchorPane.topAnchor="13.0">
+      <AnchorPane id="ap" fx:id="ap" layoutX="16.0" layoutY="13.0" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="160.0" prefWidth="296.0" styleClass="mainFxmlClass" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="13.0">
           <stylesheets>
               <URL value="@note.css" />
           </stylesheets>
@@ -52,20 +52,19 @@
                   <JFXColorPicker id="cp" fx:id="cpTxt" layoutX="231.0" layoutY="8.0" minHeight="12.0" onAction="#changeColorTxt" prefHeight="12.0" prefWidth="23.0" promptText="change color" />
                </children>
             </Pane>
-            <Pane layoutX="6.0" layoutY="43.0" prefHeight="114.0" prefWidth="284.0" style="-fx-background-color: #ffffff31; -fx-background-radius: 5px;" AnchorPane.bottomAnchor="6.0" AnchorPane.topAnchor="43.0">
-               <children>
-                  <BorderPane>
-                     <center>
-                        <JFXTextArea id="scrlv2" fx:id="taNote" focusColor="#00000036" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="284.0" style="-fx-highlight-fill: #b8b8b8; -fx-text-fill: white;" unFocusColor="TRANSPARENT">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </JFXTextArea>
-                     </center>
-                  </BorderPane>
-               </children>
-            </Pane>
-            <JFXButton fx:id="bPaw" contentDisplay="CENTER" layoutX="262.0" layoutY="40.0" onMouseDragged="#onDrag" onMousePressed="#onPress" onMouseReleased="#onRelease" prefHeight="25.0" prefWidth="23.0" text=" ">
+            <BorderPane layoutX="6.0" layoutY="43.0" style="-fx-background-color: #ffffff31; -fx-background-radius: 5px;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="43.0">
+               <center>
+                  <JFXTextArea id="scrlv2" fx:id="taNote" focusColor="#00000036" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="284.0" style="-fx-highlight-fill: #b8b8b8; -fx-text-fill: white;" unFocusColor="TRANSPARENT">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets left="2.0" />
+                     </BorderPane.margin>
+                  </JFXTextArea>
+               </center>
+            </BorderPane>
+            <JFXButton fx:id="bPaw" contentDisplay="CENTER" layoutX="262.0" layoutY="40.0" onMouseDragged="#onDrag" onMousePressed="#onPress" onMouseReleased="#onRelease" prefHeight="25.0" prefWidth="23.0" text=" " AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="40.0">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="PAW" size="15" />
                </graphic>

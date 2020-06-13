@@ -55,7 +55,7 @@ public class JdbcService {
             String createPemasukan = "CREATE TABLE IF NOT EXISTS `note` (" +
                 "  id integer primary key autoincrement," +
                 "  title varchar," +
-                "  text varchar," +
+                "  txt varchar," +
                 "  url_picture varchar," +
                 "  color_bg varchar," +
                 "  color_txt varchar," +
@@ -84,7 +84,7 @@ public class JdbcService {
             String sql;
             boolean insert = false;
             if (n.getId() > 0) {
-                sql = "update note set title=?, text=?, url_picture=?, color_bg=?, color_txt=?, "
+                sql = "update note set title=?, txt=?, url_picture=?, color_bg=?, color_txt=?, "
                         + "is_picture=?, x=?, y=? where id=?";
                 statement = getConnection().prepareStatement(sql);
                 statement.setString(1, n.getTitle());
@@ -110,30 +110,12 @@ public class JdbcService {
                 statement.setInt(8, n.getY());
             }
             statement.executeUpdate();
-//            statement = getConnection().prepareStatement("select * from note where title=? and text=? and "
-//                    + "url_picture=? and color_bg=? and color_txt=? and is_picture=? and x=? and y=?"); 
-//            statement.setString(1, n.getTitle());
-//            statement.setString(2, n.getText());
-//            statement.setString(3, n.getUrl_picture());
-//            statement.setString(4, n.getColor_bg());
-//            statement.setString(5, n.getColor_txt());
-//            statement.setString(6, n.getIs_picture());
-//            statement.setInt(7, n.getX());
-//            statement.setInt(8, n.getY());
             if (insert) {
                 statement = getConnection().prepareStatement("select last_insert_rowid()");
                 Note p = new Note();
                 ResultSet rs = statement.executeQuery();
                 if (rs.next()) {             
                     p.setId(rs.getInt("last_insert_rowid()"));
-    //                p.setTitle(rs.getString("title"));
-    //                p.setText(rs.getString("text"));
-    //                p.setColor_bg(rs.getString("color_bg"));
-    //                p.setColor_txt(rs.getString("color_txt"));
-    //                p.setUrl_picture(rs.getString("url_picture"));
-    //                p.setIs_picture(rs.getString("is_picture"));
-    //                p.setX(rs.getInt("x"));
-    //                p.setY(rs.getInt("y"));
                 }
                 return p;
             }
@@ -163,7 +145,7 @@ public class JdbcService {
                 Note p = new Note();
                 p.setId(rs.getInt("id"));
                 p.setTitle(rs.getString("title"));
-                p.setText(rs.getString("text"));
+                p.setText(rs.getString("txt"));
                 p.setColor_bg(rs.getString("color_bg"));
                 p.setColor_txt(rs.getString("color_txt"));
                 p.setUrl_picture(rs.getString("url_picture"));
