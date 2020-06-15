@@ -58,7 +58,7 @@
             </HBox>
             <BorderPane layoutX="6.0" layoutY="43.0" style="-fx-background-color: #ffffff31; -fx-background-radius: 5px;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="43.0">
                <center>
-                  <JFXTextArea id="scrlv2" fx:id="taNote" focusColor="#00000036" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="108.0" prefWidth="284.0" style="-fx-highlight-fill: #b8b8b8; -fx-text-fill: white;" unFocusColor="TRANSPARENT">
+                  <JFXTextArea id="scrlv2" fx:id="taNote" focusColor="#00000036" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="284.0" style="-fx-highlight-fill: #b8b8b8; -fx-text-fill: white;" unFocusColor="TRANSPARENT">
                      <font>
                         <Font size="16.0" />
                      </font>

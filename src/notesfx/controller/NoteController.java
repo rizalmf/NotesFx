@@ -53,7 +53,7 @@ import org.controlsfx.control.textfield.CustomTextField;
 /**
  * FXML Controller class
  *
- * @author PKane_NS
+ * @author RIZAL
  */
 public class NoteController implements Initializable {
 
@@ -87,6 +87,7 @@ public class NoteController implements Initializable {
     private Note note2;
     private JdbcService service;
     public List<Note> noteList;
+    private Stage thisStage;
     /**
      * Initializes the controller class.
      */
@@ -123,7 +124,9 @@ public class NoteController implements Initializable {
             }
         });
         Platform.runLater(() -> {
-            Stage thisStage = (Stage) ap.getScene().getWindow();
+            if (thisStage == null) {
+                thisStage = (Stage) ap.getScene().getWindow();
+            }
             new FXResizeHelper(thisStage, -5, 24, 325, 171);
             imageView.fitWidthProperty().bind(ap.widthProperty());
             imageView.fitHeightProperty().bind(ap.heightProperty());
@@ -154,9 +157,13 @@ public class NoteController implements Initializable {
                 }
             }
         }
-        Stage thisStage = (Stage) ap.getScene().getWindow();
+        if (thisStage == null) {
+            thisStage = (Stage) ap.getScene().getWindow();
+        }
         thisStage.setX(n.getX());
         thisStage.setY(n.getY());
+        thisStage.setWidth(n.getWidth());
+        thisStage.setHeight(n.getHeight());
     }
     private void getFromOther(){
         Timeline tl = new Timeline(new KeyFrame(Duration.ONE, (e) -> {
@@ -247,6 +254,8 @@ public class NoteController implements Initializable {
         String text = taNote.getText();
         String color_bg = toRGB(cp.getValue());
         String color_txt = toRGB(cpTxt.getValue());
+        int width =(int) thisStage.getWidth();
+        int height =(int) thisStage.getHeight();
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
@@ -262,6 +271,8 @@ public class NoteController implements Initializable {
                 note.setColor_txt(color_txt);
                 note.setX(x);
                 note.setY(y);
+                note.setWidth(width);
+                note.setHeight(height);
                 note = service.saveNote(note);
 //                System.out.println("save with note_id="+note.getId());
             }
@@ -321,7 +332,7 @@ public class NoteController implements Initializable {
             service.deleteNote(note.getId());
             service.close();
         }
-        Stage thisStage = (Stage) ap.getScene().getWindow();
+        thisStage = (Stage) ap.getScene().getWindow();
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
