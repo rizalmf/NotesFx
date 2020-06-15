@@ -19,7 +19,7 @@ import notesfx.service.JdbcService;
 
 /**
  *
- * @author PKane_NS
+ * @author RIZAL
  */
 public class NotesFx extends Application {
     private JdbcService service;

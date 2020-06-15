@@ -9,7 +9,7 @@ import java.util.prefs.Preferences;
 
 /**
  *
- * @author PKane_NS
+ * @author RIZAL
  */
 public class DataSession {
     private Preferences p;
