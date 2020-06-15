@@ -7,7 +7,7 @@ package notesfx.model;
 
 /**
  *
- * @author PKane_NS
+ * @author RIZAL
  */
 public class Note {
     private int id;
@@ -19,6 +19,25 @@ public class Note {
     private String is_picture;
     private int x;
     private int y;
+    private int width;
+    private int height;
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    
 
     public String getUrl_picture() {
         return url_picture;

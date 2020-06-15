@@ -19,7 +19,7 @@ import notesfx.model.Note;
 
 /**
  *
- * @author PKane_NS
+ * @author RIZAL
  */
 public class JdbcService {
     private Connection connection;
@@ -52,7 +52,7 @@ public class JdbcService {
     }
     public void createDB(){
         try {
-            String createPemasukan = "CREATE TABLE IF NOT EXISTS `note` (" +
+            String createNote = "CREATE TABLE IF NOT EXISTS `note` (" +
                 "  id integer primary key autoincrement," +
                 "  title varchar," +
                 "  txt varchar," +
@@ -61,18 +61,36 @@ public class JdbcService {
                 "  color_txt varchar," +
                 "  is_picture varchar," +
                 "  x integer," +
-                "  y integer" +
+                "  y integer," +
+                "  width integer," +
+                "  height integer" +
                 ")";
-            statement = getConnection().prepareStatement(createPemasukan);
+            statement = getConnection().prepareStatement(createNote);
             statement.executeUpdate();
+            addSize();
         } catch (Exception e) {
             Logger.getLogger(JdbcService.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+    private void addSize(){
+        try {
+            String createWidth = "ALTER TABLE `note`"
+                    + " ADD COLUMN width integer";
+            statement = getConnection().prepareStatement(createWidth);
+            statement.executeUpdate();
+            String createHeight = "ALTER TABLE `note`"
+                    + " ADD COLUMN height integer";
+            statement = getConnection().prepareStatement(createHeight);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            //Logger.getLogger(JdbcService.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
     public void clearDB(){
         try {
-            String createPemasukan = "delete from note";
-            statement = getConnection().prepareStatement(createPemasukan);
+            String deleteNote = "delete from note";
+            statement = getConnection().prepareStatement(deleteNote);
             statement.executeUpdate();
             getConnection().close();
         } catch (Exception e) {
@@ -85,7 +103,7 @@ public class JdbcService {
             boolean insert = false;
             if (n.getId() > 0) {
                 sql = "update note set title=?, txt=?, url_picture=?, color_bg=?, color_txt=?, "
-                        + "is_picture=?, x=?, y=? where id=?";
+                        + "is_picture=?, x=?, y=?, width=?, height=? where id=?";
                 statement = getConnection().prepareStatement(sql);
                 statement.setString(1, n.getTitle());
                 statement.setString(2, n.getText());
@@ -95,10 +113,12 @@ public class JdbcService {
                 statement.setString(6, n.getIs_picture());
                 statement.setInt(7, n.getX());
                 statement.setInt(8, n.getY());
-                statement.setInt(9, n.getId());
+                statement.setInt(9, n.getWidth());
+                statement.setInt(10, n.getHeight());
+                statement.setInt(11, n.getId());
             }else{
                 insert = true;
-                sql = "insert into note values(null, ?, ?, ?, ?, ?, ?, ?, ?)";
+                sql = "insert into note values(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 statement = getConnection().prepareStatement(sql);
                 statement.setString(1, n.getTitle());
                 statement.setString(2, n.getText());
@@ -108,6 +128,8 @@ public class JdbcService {
                 statement.setString(6, n.getIs_picture());
                 statement.setInt(7, n.getX());
                 statement.setInt(8, n.getY());
+                statement.setInt(9, n.getWidth());
+                statement.setInt(10, n.getHeight());
             }
             statement.executeUpdate();
             if (insert) {
@@ -153,6 +175,8 @@ public class JdbcService {
 //                System.out.println(p.getUrl_picture()+", "+p.getIs_picture());
                 p.setX(rs.getInt("x"));
                 p.setY(rs.getInt("y"));
+                p.setWidth(rs.getInt("width"));
+                p.setHeight(rs.getInt("height"));
                 notes.add(p);
             }
             return notes;
