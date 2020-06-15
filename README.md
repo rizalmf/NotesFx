@@ -11,6 +11,8 @@
 ![2](2.gif)
 
 ### Changelog
+- v1.3.1
+   - fix global stage
 - **v1.3.0 (build ready)**
    - add save resized notes, fix textarea binding
 - **v1.2.1 (build ready)**

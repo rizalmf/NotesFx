@@ -247,7 +247,9 @@ public class NoteController implements Initializable {
         saveNote();
     }
     private void saveNote(){
-        Stage thisStage = (Stage) ap.getScene().getWindow();
+        if (thisStage == null) {
+            thisStage = (Stage) ap.getScene().getWindow();
+        }
         int x =(int) thisStage.getX();
         int y =(int) thisStage.getY();
         String title = tfTitle.getText();
@@ -315,7 +317,9 @@ public class NoteController implements Initializable {
         stage.getIcons().add(new Image(NotesFx.class.getResourceAsStream("icon-min.png")));
         Scene scene = new Scene(root1);
         scene.setFill(Color.TRANSPARENT);
-        Stage thisStage = (Stage) ap.getScene().getWindow();
+        if (thisStage == null) {
+            thisStage = (Stage) ap.getScene().getWindow();
+        }
         stage.setX(thisStage.getX() - 300);
         stage.setY(thisStage.getY());
         stage.setScene(scene);  
