@@ -11,6 +11,8 @@
 ![2](2.gif)
 
 ### Changelog
+- **v1.4.1 (update ready)**
+   - improve updating
 - **v1.4.0 (build ready)**
    - add updater, prevent huge download
 - v1.3.1

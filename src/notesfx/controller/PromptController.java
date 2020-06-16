@@ -7,7 +7,6 @@ package notesfx.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,9 +24,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import notesfx.service.DataSession;
-import static notesfx.util.ApplicationProperties.JAR_NAME;
 import static notesfx.util.ApplicationProperties.JAR_UPDATER_NAME;
-import static notesfx.util.ApplicationProperties.VERSION_FILE;
 import notesfx.util.Downloader;
 
 /**
