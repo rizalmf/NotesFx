@@ -170,8 +170,12 @@ public class NoteController implements Initializable {
         }
         thisStage.setX(n.getX());
         thisStage.setY(n.getY());
-        thisStage.setWidth(n.getWidth());
-        thisStage.setHeight(n.getHeight());
+        if (n.getWidth() > 0) {
+            thisStage.setWidth(n.getWidth());
+        }
+        if (n.getHeight() > 0) {
+            thisStage.setHeight(n.getHeight());
+        }
     }
     private void getFromOther(){
         Timeline tl = new Timeline(new KeyFrame(Duration.ONE, (e) -> {
