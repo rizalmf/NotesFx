@@ -16,7 +16,7 @@ import static notesfx.util.ApplicationProperties.SERVER_URL;
 
 /**
  *
- * @author PKane_NS
+ * @author RIZAL
  */
 public class Downloader {
     private URL url;

@@ -30,7 +30,7 @@ import notesfx.util.Downloader;
 /**
  * FXML Controller class
  *
- * @author TOSHIBA
+ * @author RIZAL
  */
 public class PromptController implements Initializable {
 
