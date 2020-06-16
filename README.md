@@ -1,7 +1,7 @@
 # NotesFx
  Simple notes build in JavaFx
 
-## Download app
+## Download app (add auto update on v1.4.0 and later to prevent huge download)
   - [NotesFx v1.4.0.zip](https://github.com/rizalmf/NotesFx/raw/master/out/NotesFx%20v1.4.0.zip) (JRE 8 and JavaFx 8 SDK needed).
   - [NotesFx v1.4.0-Installer.exe](https://github.com/rizalmf/NotesFx/raw/master/out/NotesFx%20v1.4.0-installer.exe) (Windows only).
   - [Older version..](https://github.com/rizalmf/NotesFx/tree/master/out) 
