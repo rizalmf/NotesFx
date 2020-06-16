@@ -1,0 +1,11 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    
+}
+#lIco{
+    -fx-background-image: url("icon-min.png");
+    -fx-background-size: stretch;
+}

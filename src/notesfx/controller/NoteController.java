@@ -8,10 +8,13 @@ package notesfx.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXColorPicker;
 import com.jfoenix.controls.JFXTextArea;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +49,11 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import notesfx.NotesFx;
 import notesfx.model.Note;
+import notesfx.service.DataSession;
 import notesfx.service.JdbcService;
+import static notesfx.util.ApplicationProperties.VERSION_FILE;
+import static notesfx.util.ApplicationProperties.VERSION;
+import notesfx.util.Downloader;
 import notesfx.util.FXResizeHelper;
 import org.controlsfx.control.textfield.CustomTextField;
 
@@ -88,12 +95,14 @@ public class NoteController implements Initializable {
     private JdbcService service;
     public List<Note> noteList;
     private Stage thisStage;
+    private Downloader downloader;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        downloader = new Downloader();
         service = new JdbcService();
         cp.setValue(Color.web("#dc5a5a"));
         getFromOther();
@@ -181,7 +190,21 @@ public class NoteController implements Initializable {
                 setNewNote(note);
                 if (noteList.size() > 0) {
                     newNoteStart(note);
+                }else{
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            checkVersion();
+                        }
+                    }, 0);
                 }
+            }else{
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        checkVersion();
+                    }
+                }, 0);
             }
         }));
         tl.setCycleCount(1);
@@ -350,6 +373,62 @@ public class NoteController implements Initializable {
         thisStage.close();
     }
 
-
+    private void checkVersion() {
+        DataSession session = new DataSession();
+        String savedVer = session.getVersion().replaceAll(" ", "");
+        if (savedVer.isEmpty()) {
+            session.setVersion(VERSION);
+        }
+        File file = downloader.downloadApp(System.getProperty("user.dir"), VERSION_FILE);
+        if (file != null) {
+            try {
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                String read;
+                while((read = br.readLine()) != null){
+                    String v = read.replaceAll("\\.", "").replaceAll(" ", "");
+                    try {
+                        int iv = Integer.parseInt(v);
+                        int ivNow = Integer.parseInt(session.getVersion().replaceAll("\\.", "").replaceAll(" ", ""));
+                        System.out.println(iv+", "+ivNow);
+                        if (iv > ivNow) {
+                            Timeline tl = new Timeline(new KeyFrame(Duration.ONE, (event) -> {
+                                initPrompt(v);
+                            }));
+                            tl.play();
+                            break;
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+                br.close();
+            } catch (Exception e) {
+                Logger.getLogger(NoteController.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
+    private void initPrompt(String vers){
+        FXMLLoader fxmlLoader = new FXMLLoader(NotesFx.class.getResource("views/prompt.fxml"));
+        Parent root1 = null;
+        try {
+            root1 = (Parent) fxmlLoader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(NoteController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Stage stage = new Stage();
+        stage.setOnCloseRequest((WindowEvent event1) -> {
+//            System.exit(0);
+            stage.close();
+        });
+        PromptController pc = fxmlLoader.getController();
+        pc.setTargetVersion(vers);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setTitle("update available");
+        stage.getIcons().add(new Image(NotesFx.class.getResourceAsStream("icon-min.png")));
+        Scene scene = new Scene(root1);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setScene(scene);  
+        stage.show();
+    }
     
 }

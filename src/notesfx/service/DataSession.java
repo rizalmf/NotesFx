@@ -6,6 +6,7 @@
 package notesfx.service;
 
 import java.util.prefs.Preferences;
+import static notesfx.util.ApplicationProperties.SESSION_NAME;
 
 /**
  *
@@ -32,5 +33,13 @@ public class DataSession {
     public void setColorTxt(String txt){
         p = Preferences.userRoot().node("notefx");
         p.put("txt", txt);
+    }
+    public String getVersion(){
+        p = Preferences.userRoot().node(SESSION_NAME);
+        return p.get("version", "");
+    }
+    public void setVersion(String txt){
+        p = Preferences.userRoot().node(SESSION_NAME);
+        p.put("version", txt);
     }
 }

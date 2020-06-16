@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="parent" prefHeight="123.0" prefWidth="224.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="notesfx.controller.PromptController">
+    <stylesheets>
+        <URL value="@prompt.css" />
+    </stylesheets>
+   <children>
+      <VBox fx:id="ap" alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #dddddd; -fx-background-radius: 7px;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <effect>
+            <DropShadow height="6.17" radius="2.585" width="6.17" />
+         </effect>
+         <children>
+            <HBox>
+               <children>
+                  <Label id="lIco" prefHeight="17.0" prefWidth="21.0" />
+               </children>
+               <VBox.margin>
+                  <Insets left="4.0" top="2.0" />
+               </VBox.margin>
+            </HBox>
+            <Label text="Update Available!">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" spacing="15.0">
+               <children>
+                  <Button fx:id="bUpdate" mnemonicParsing="false" text="Update" />
+                  <Button fx:id="bClose" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Close" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

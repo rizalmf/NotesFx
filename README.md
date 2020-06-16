@@ -11,6 +11,8 @@
 ![2](2.gif)
 
 ### Changelog
+- **v1.4.0 (build ready)**
+   - add updater, prevent huge download
 - v1.3.1
    - fix global stage
 - **v1.3.0 (build ready)**
