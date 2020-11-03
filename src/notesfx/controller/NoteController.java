@@ -159,7 +159,8 @@ public class NoteController implements Initializable {
                     try {
                         img = new Image(new FileInputStream(new File(url)), 296, 160, false, false);
                     } catch (FileNotFoundException ex) {
-                        Logger.getLogger(NoteController.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("img not found");
+//                        Logger.getLogger(NoteController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     imageView.setImage(img);
                 }

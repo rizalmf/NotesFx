@@ -3581,8 +3581,8 @@
     <target name="-check-dpkg-presence" depends="-check-native-bundling-type" if="need.dpkg.presence">
         <local name="exec.which.dpkg.result"/>
         <local name="exec.which.dpkg.output"/>
-        <exec executable="command" failifexecutionfails="false" failonerror="false" resultproperty="exec.which.dpkg.result" outputproperty="exec.which.dpkg.output">
-            <arg line="-v dpkg"/>
+        <exec executable="which" failifexecutionfails="false" failonerror="false" resultproperty="exec.which.dpkg.result" outputproperty="exec.which.dpkg.output">
+            <arg line="dpkg"/>
         </exec>
         <condition property="missing.dpkg">
             <not><and>
